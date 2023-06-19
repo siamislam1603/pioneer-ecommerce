@@ -42,7 +42,7 @@ const theme = createTheme({
     }
   },
   typography: {
-    fontFamily: ['Poppins', 'Spectral', 'Roboto'].join(),
+    fontFamily: ['Poppins', 'Spectral', 'Roboto','Inter'].join(),
     fontWeightLight: 400,
     fontWeightRegular: 500,
     fontWeightMedium: 600,
