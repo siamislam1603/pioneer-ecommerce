@@ -1,4 +1,5 @@
-import {CssBaseline, ThemeProvider, createTheme} from '@mui/material'
+import {CssBaseline} from '@mui/material'
+import {ThemeProvider, createTheme} from '@mui/material/styles'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom'
 import App from './App.jsx'
@@ -8,6 +9,7 @@ const theme = createTheme({
       dark: '#232347',
       main: '#001439',
       light: '#0E4B80',
+      contrastText:'#041318'
     },
     info: {
       dark: '#1E66FF',
@@ -32,7 +34,7 @@ const theme = createTheme({
       main:'#6C6C6C',
       dark:'#585858',
       light:'#8D8D8D',
-      contrastText:''
+      contrastText:'#5F5F5F'
     },
     mateBlack:{
       main:'#3B3849',

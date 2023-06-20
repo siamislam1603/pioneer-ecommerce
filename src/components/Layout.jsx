@@ -1,14 +1,14 @@
-import {Container} from '@mui/material'
+import {styled} from '@mui/material'
 import {Outlet} from 'react-router-dom'
 import Header from './Header/Header'
 
+const Offset = styled('div')(({theme}) => theme.mixins.toolbar)
 const Layout = () => {
   return (
     <>
       <Header />
-      <Container>
-        <Outlet />
-      </Container>
+      <Offset />
+      <Outlet />
     </>
   )
 }

@@ -1,10 +1,10 @@
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined'
-import SearchIcon from '@mui/icons-material/Search'
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined'
-import {Badge, Button, IconButton, InputBase, Paper, Stack, Toolbar} from '@mui/material'
+import {Badge, Button, IconButton, Stack, Toolbar, useMediaQuery, useTheme} from '@mui/material'
 import {Logo, NavBar} from './styles'
+import Search from './Search'
 
 const menuItems = [
   {icon: <PermIdentityOutlinedIcon />, title: 'Account'},
@@ -14,47 +14,47 @@ const menuItems = [
 ]
 
 const Header = () => {
+  const theme = useTheme()
   return (
-    <NavBar>
-      <Toolbar>
-        <Logo src="assets/images/logo.png" alt="" />
-        <Paper
-          component="form"
-          className="search-input-container"
-          sx={{pl: '36px', display: 'flex', alignItems: 'center', width: 529, borderRadius: '30px'}}
-          elevation={0}
-        >
-          <InputBase
-            size="small"
-            sx={{ml: 1, flex: 1}}
-            placeholder="Search SnipShop.com"
-            inputProps={{'aria-label': 'Search SnipShop.com'}}
+    <>
+      <NavBar elevation={0}>
+        <Toolbar>
+          <Logo
+            src={
+              useMediaQuery(theme.breakpoints.up('sm'))
+                ? 'assets/images/logo.png'
+                : 'assets/images/logo-small.png'
+            }
+            alt=""
           />
-          <IconButton type="button" className="search-button" aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        </Paper>
-        <Stack direction="row" alignItems="center" spacing={1} className="menu-items">
-          {menuItems.map((item, i) => (
-            <Stack key={i} direction="row" alignItems="center" spacing={1}>
-              {item.title ? (
-                <Button className="menu-button" startIcon={<>{item.icon}</>}>
-                  <span className="title">{item.title}</span>
-                </Button>
-              ) : item.isBadge ? (
-                <Badge color="secondary" badgeContent={1} size="small">
-                  {item.icon}
-                </Badge>
-              ) : (
-                <IconButton sx={{color: 'white', pl: 3}} className="hamburger-icon">
-                  {item.icon}
-                </IconButton>
-              )}
-            </Stack>
-          ))}
-        </Stack>
-      </Toolbar>
-    </NavBar>
+          <Search/>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={useMediaQuery(theme.breakpoints.down('sm')) ? 0 : 1}
+            className="menu-items"
+          >
+            {menuItems.map((item, i) => (
+              <Stack key={i} direction="row" alignItems="center" spacing={1}>
+                {item.title ? (
+                  <Button className="menu-button" startIcon={<>{item.icon}</>}>
+                    <span className="title">{item.title}</span>
+                  </Button>
+                ) : item.isBadge ? (
+                  <Badge color="secondary" badgeContent={1} size="small">
+                    {item.icon}
+                  </Badge>
+                ) : (
+                  <IconButton sx={{color: 'white', pl: 3}} className="hamburger-icon">
+                    {item.icon}
+                  </IconButton>
+                )}
+              </Stack>
+            ))}
+          </Stack>
+        </Toolbar>
+      </NavBar>
+    </>
   )
 }
 
