@@ -10,24 +10,26 @@ export const BannerSection = styled('div')(
   `
 )
 
-export const BannerBg=styled(Box)(({theme,zIndex,imgUrl,backgroundPosition,isGradientBg})=>`
+export const BannerBg = styled(Box)(
+  ({theme, z_index, img_url, background_position, is_gradient_bg}) => `
     position:absolute;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background:url(${imgUrl});
+    background:url(${img_url});
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: ${backgroundPosition ?? 'bottom'};
-    z-index:${zIndex};
+    background-position: ${background_position ?? 'bottom'};
+    z-index:${z_index};
     ${theme.breakpoints.down('md')}{
-        background-position: ${isGradientBg ? 'right' : (backgroundPosition ?? 'bottom')};
+        background-position: ${is_gradient_bg ? 'right' : background_position ?? 'bottom'};
     }
     ${theme.breakpoints.up('xl')}{
         background-position:bottom;
     }
-`)
+`
+)
 
 export const StepperContainer = styled(MobileStepper)(
   ({theme}) => `
@@ -48,13 +50,13 @@ export const StepperContainer = styled(MobileStepper)(
   `
 )
 export const CarouselImg = styled(Box)(
-  ({theme, removeBorder}) => `
+  ({theme, remove_border}) => `
       position: relative;
       width: 100%;
       padding-top: 100%;
       border-radius: 50%;
       overflow: hidden; 
-      border:${removeBorder ? 'none' : `14px solid ${theme.palette.info.light}`};
+      border:${remove_border ? 'none' : `14px solid ${theme.palette.info.light}`};
       img {
           position: absolute;
           top: 0;
@@ -63,15 +65,15 @@ export const CarouselImg = styled(Box)(
           height: 100%;
           object-fit: cover;
           ${theme.breakpoints.down('sm')}{
-            position: ${removeBorder ? 'relative' : 'absolute'};
-            width: ${removeBorder ? '150px' : '100%'};
-            height: ${removeBorder ? '150px' : '100%'};
-            border-radius: ${removeBorder ? '100%' : 0};
+            position: ${remove_border ? 'relative' : 'absolute'};
+            width: ${remove_border ? '150px' : '100%'};
+            height: ${remove_border ? '150px' : '100%'};
+            border-radius: ${remove_border ? '100%' : 0};
         }
       }
       ${theme.breakpoints.down('sm')}{
-        padding-top: ${removeBorder ? 0 : '100%'};
-        border-radius: ${removeBorder ? 0 : '50%'};
+        padding-top: ${remove_border ? 0 : '100%'};
+        border-radius: ${remove_border ? 0 : '50%'};
     }
   `
 )
@@ -91,8 +93,29 @@ export const VerticalTabs = styled(Tabs)(
               color:white;
           }
       }
+      .MuiTabs-indicator{
+        display:none;
+      }
       ${theme.breakpoints.down('sm')}{
         margin-bottom: ${theme.spacing(10)};
       }
   `
+)
+
+export const CategoriesTabs = styled(Tabs)(
+  ({theme}) => `
+    .MuiTab-root{
+        text-transform:inherit;
+        color: ${theme.palette.muted.contrastText};
+        &.Mui-selected{
+            color:${theme.palette.primary.contrastText};
+        }
+    }
+    .MuiTabs-indicator{
+        color:${theme.palette.primary.contrastText};
+    }
+    .Mui-disabled {
+      display:none;
+    }
+`
 )

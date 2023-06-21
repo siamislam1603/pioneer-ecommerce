@@ -13,6 +13,16 @@ import BannerCarousel from './BannerCarousel'
 import Categories from './Categories'
 import {BannerBg, BannerSection} from './styles'
 
+const categories = [
+  'Jewelry & Accessories',
+  'Clothing & Shoes',
+  'Home & Living',
+  'Wedding & Party',
+  'Toys & Entertainment',
+  'Art & Collectibles',
+  'Craft Supplies & Tools',
+  'Vintage',
+]
 const Banner = () => {
   const theme = useTheme()
   return (
@@ -24,7 +34,7 @@ const Banner = () => {
             width: '100%',
           }}
         />
-        <Categories />
+        <Categories categories={categories}></Categories>
         <Grid container spacing={1} mt={5} position='relative'>
           <Grid item md={6}>
             <Typography variant="body2" fontFamily="Spectral" fontWeight={500} mb={1}>
@@ -72,12 +82,12 @@ const Banner = () => {
           </Grid>
         </Grid>
       <BannerBg
-        imgUrl={'../../public/assets/images/base.svg'}
-        zIndex={-1}
-        backgroundPosition={'left'}
+        img_url={'../../public/assets/images/base.svg'}
+        z_index={-1}
+        background_position={'left'}
       />
       </Container>
-      <BannerBg imgUrl={'../../public/assets/images/banner-gradient-bg.png'} zIndex={-2} isGradientBg={true} />
+      <BannerBg img_url={'../../public/assets/images/banner-gradient-bg.png'} z_index={-2} is_gradient_bg={"true"} />
     </BannerSection>
   )
 }

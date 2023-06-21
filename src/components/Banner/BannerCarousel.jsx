@@ -64,6 +64,7 @@ const BannerCarousel = () => {
         <VerticalTabs
           orientation={isExtraSmallVW ? 'horizontal' : 'vertical'}
           variant="scrollable"
+          value={0}
           scrollButtons
           allowScrollButtonsMobile
         >
@@ -72,7 +73,7 @@ const BannerCarousel = () => {
               key={i}
               label={
                 <Box width={isExtraSmallVW ? 150 : '100%'}>
-                  <CarouselImg removeBorder={true}>
+                  <CarouselImg remove_border={"true"}>
                     <Box component="img" src={item.imgPath} alt="" />
                   </CarouselImg>
                   <Typography variant="body2" mt={2} noWrap={isExtraSmallVW ? true : false}>
