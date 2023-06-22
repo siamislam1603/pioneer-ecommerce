@@ -1,6 +1,7 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import {Box, Container, Stack, Typography} from '@mui/material'
+import {useEffect, useRef, useState} from 'react'
 import Categories from '../Banner/Categories'
 import TrendingProducts from './TrendingProducts'
 import {TabsButton} from './styles'
@@ -18,7 +19,14 @@ const data = [
   {imgPath: 'assets/images/trending-4.svg', title: 'Chair', price: 40.0},
   {imgPath: 'assets/images/trending-5.svg', title: 'Curology', price: 50.0},
 ]
+const scrollIcons = {left: <ChevronLeftIcon />, right: <ChevronRightIcon />}
 const Trending = () => {
+  const leftScrollRef = useRef(),
+    rightScrollRef = useRef()
+  const [scrollButtonsRef, setScrollButtonsRef] = useState({left: null, right: null})
+  useEffect(() => {
+    setScrollButtonsRef({left: leftScrollRef, right: rightScrollRef})
+  }, [])
   return (
     <Box my={15}>
       <Container maxWidth="sm" sx={{color: 'mateBlack.dark'}}>
@@ -34,17 +42,21 @@ const Trending = () => {
           <Box></Box>
           <Categories categories={categories}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <TabsButton className="disabled" size="small">
-                <ChevronLeftIcon />
-              </TabsButton>
-              <TabsButton size="small">
-                <ChevronRightIcon />
-              </TabsButton>
+              {Object.entries(scrollIcons).map(([direction, icon], i) => (
+                <TabsButton
+                  key={i}
+                  className={scrollButtonsRef[direction]?.current?.disabled ? 'disabled' : ''}
+                  size="small"
+                  onClick={()=>scrollButtonsRef[direction]?.current.click()}
+                >
+                  {icon}
+                </TabsButton>
+              ))}
             </Stack>
           </Categories>
         </Stack>
       </Container>
-      <TrendingProducts products={data} />
+      <TrendingProducts products={data} scrollButtonsRef={scrollButtonsRef} />
     </Box>
   )
 }

@@ -1,4 +1,5 @@
-import {Box, Container, Grid, Tab, Typography, useTheme} from '@mui/material'
+import {Box, ButtonBase, Grid, Tab, Typography, useTheme} from '@mui/material'
+import {ScrollableContainer} from '../../styles'
 import {CardContainer, TrendingProductsTabs} from './styles'
 
 const gradientBackgrounds = [
@@ -8,11 +9,37 @@ const gradientBackgrounds = [
   '#EBF9FF',
   '#E9F0FF',
 ]
-const TrendingProducts = ({products}) => {
+const TrendingProducts = ({products, scrollButtonsRef}) => {
   const theme = useTheme()
+  const scrollButtons = (props) => {
+    const {direction, onClick, disabled, orientation, ...others} = props
+    return (
+      <ButtonBase
+        direction={direction}
+        onClick={onClick}
+        disabled={disabled}
+        orientation={orientation}
+        ref={scrollButtonsRef[direction]}
+        className={others.className}
+        sx={{display: 'none'}}
+      >
+        {direction}
+      </ButtonBase>
+    )
+  }
   return (
-    <Container maxWidth="xl" sx={{my: 8}}>
-      <TrendingProductsTabs value={0} variant="scrollable" scrollButtons allowScrollButtonsMobile>
+    <ScrollableContainer
+      width={document.querySelector('.MuiContainer-root')?.offsetLeft ?? 0}
+      maxWidth="xl"
+      sx={{my: 8}}
+    >
+      <TrendingProductsTabs
+        value={0}
+        variant="scrollable"
+        scrollButtons
+        allowScrollButtonsMobile
+        ScrollButtonComponent={scrollButtons}
+      >
         {products.map((product, i) => (
           <Tab
             key={i}
@@ -48,7 +75,7 @@ const TrendingProducts = ({products}) => {
           />
         ))}
       </TrendingProductsTabs>
-    </Container>
+    </ScrollableContainer>
   )
 }
 
