@@ -1,4 +1,4 @@
-import {Box, Card, Tabs, styled} from '@mui/material'
+import {Box, Card, Link, Tabs, styled} from '@mui/material'
 
 export const FeaturedProductsTabs = styled(Tabs)(
   ({theme}) => `
@@ -52,11 +52,27 @@ export const CardContainer = styled(Card)(
     }
 `
 )
-export const FeaturedProductsContainer=styled(Box)(({theme})=>`
+export const FeaturedProductsContainer = styled(Box)(
+  ({theme}) => `
     ${theme.breakpoints.up('sm')}{
         display:flex;
         flex-direction:row;
         align-items:center;
         gap: ${theme.spacing(5)};
     }
-`)
+`
+)
+export const OrderNowButton = styled(Link)(
+  ({theme}) => `
+    color:white;
+    background-color:${theme.palette.primary.main};
+    border-radius:42px;
+    margin-top: ${theme.spacing(5)};
+    text-decoration:none;
+    cursor:pointer;
+    padding:${theme.spacing(1.5, 4)};
+    :hover{
+        box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    }
+`
+)
