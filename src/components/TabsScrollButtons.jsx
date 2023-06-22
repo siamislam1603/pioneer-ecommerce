@@ -21,7 +21,7 @@ const TabsButton = styled(IconButton)(
 const TabsScrollButtons = ({handleScrollButtonClick}) => {
   const scrollIcons = {left: <ChevronLeftIcon />, right: <ChevronRightIcon />}
   return (
-    <Stack direction="row" spacing={2} alignItems="center">
+    <Stack direction="row" spacing={2} alignItems="center" justifyContent='end'>
       {Object.entries(scrollIcons).map(([direction, icon], i) => (
         <TabsButton
           key={i}

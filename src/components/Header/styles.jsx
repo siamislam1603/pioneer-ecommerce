@@ -26,7 +26,7 @@ export const NavBar = styled(AppBar)(
     background-color:${theme.palette.info.dark};
     & .MuiToolbar-root{
         justify-content:space-between;
-       ${theme.breakpoints.up('lg')} {
+       ${theme.breakpoints.up('xl')} {
             padding-left:135px;
             padding-right:135px;
         }
