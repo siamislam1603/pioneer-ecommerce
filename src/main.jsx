@@ -4,6 +4,24 @@ import ReactDOM from 'react-dom/client'
 import {BrowserRouter} from 'react-router-dom'
 import App from './App.jsx'
 const theme = createTheme({
+  breakpoints:{
+    keys:[
+      'xs',
+      'sm',
+      'tablet',
+      'md',
+      'lg',
+      'xl',
+    ],
+    values:{
+      xs:0,
+      sm:600,
+      tablet:640,
+      md:900,
+      lg:1200,
+      xl:1536,
+    }
+  },
   palette: {
     primary: {
       dark: '#232347',

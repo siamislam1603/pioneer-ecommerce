@@ -1,10 +1,8 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
-import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import {Box, Container, Stack, Typography} from '@mui/material'
 import {useEffect, useRef, useState} from 'react'
 import Categories from '../Banner/Categories'
+import TabsScrollButtons from '../TabsScrollButtons'
 import TrendingProducts from './TrendingProducts'
-import {TabsButton} from './styles'
 
 const categories = ['Fashion', 'Technology', 'Interiors', 'Food & Drink']
 const data = [
@@ -19,7 +17,6 @@ const data = [
   {imgPath: 'assets/images/trending-4.svg', title: 'Chair', price: 40.0},
   {imgPath: 'assets/images/trending-5.svg', title: 'Curology', price: 50.0},
 ]
-const scrollIcons = {left: <ChevronLeftIcon />, right: <ChevronRightIcon />}
 const Trending = () => {
   const leftScrollRef = useRef(),
     rightScrollRef = useRef()
@@ -27,6 +24,9 @@ const Trending = () => {
   useEffect(() => {
     setScrollButtonsRef({left: leftScrollRef, right: rightScrollRef})
   }, [])
+  const handleScrollButtonClick = (direction) => {
+    scrollButtonsRef[direction]?.current.click()
+  }
   return (
     <Box my={15}>
       <Container maxWidth="sm" sx={{color: 'mateBlack.dark'}}>
@@ -41,18 +41,7 @@ const Trending = () => {
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Box></Box>
           <Categories categories={categories}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              {Object.entries(scrollIcons).map(([direction, icon], i) => (
-                <TabsButton
-                  key={i}
-                  className={scrollButtonsRef[direction]?.current?.disabled ? 'disabled' : ''}
-                  size="small"
-                  onClick={()=>scrollButtonsRef[direction]?.current.click()}
-                >
-                  {icon}
-                </TabsButton>
-              ))}
-            </Stack>
+            <TabsScrollButtons handleScrollButtonClick={handleScrollButtonClick} />
           </Categories>
         </Stack>
       </Container>

@@ -1,4 +1,4 @@
-import {Grid, IconButton, Tabs, styled} from '@mui/material'
+import {Grid, Tabs, styled} from '@mui/material'
 
 export const CardContainer = styled(Grid)(
   ({theme, bg_color}) => `
@@ -42,17 +42,4 @@ export const TrendingProductsTabs = styled(Tabs)(
       padding-top:${theme.spacing(4)};
     }
   `
-)
-export const TabsButton = styled(IconButton)(
-  ({theme}) => `
-    background-color:${theme.palette.mateBlack.dark};
-    color:white;
-    &:hover{
-        background-color:${theme.palette.mateBlack.main};
-    }
-    &.disabled{
-        background-color:${theme.palette.secondary.main};
-        color:rgba(0,0,0,0.1);
-    }
-`
 )
