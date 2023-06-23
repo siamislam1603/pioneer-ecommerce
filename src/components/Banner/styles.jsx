@@ -105,7 +105,7 @@ export const VerticalTabs = styled(Tabs)(
 export const CategoriesTabs = styled(Tabs)(
   ({theme}) => `
     .MuiTab-root{
-        text-transform:inherit;
+        text-transform:capitalize;
         color: ${theme.palette.muted.contrastText};
         &.Mui-selected{
             color:${theme.palette.primary.contrastText};
