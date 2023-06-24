@@ -1,8 +1,28 @@
 import {Container, Grid, Stack, Typography} from '@mui/material'
+import {useDispatch, useSelector} from 'react-redux'
+import {fetchPaginatedProducts} from '../../actions/home'
 import TabsScrollButtons from '../TabsScrollButtons'
 import ProductCard from './ProductCard'
 
 const CategoricalProducts = () => {
+  const {categorical} = useSelector((state) => state.products)
+  const {limit, currentPage, products, total} = categorical
+  const dispatch = useDispatch()
+  const handleScrollButtonClick = (direction) => {
+    const productsLen = products.length
+    const updatedCurrentPage = currentPage - (direction === 'right' ? -1 : 1)
+    if (products.length === currentPage * limit + limit && productsLen < total && direction==='right') {
+      dispatch(
+        fetchPaginatedProducts({
+          limit,
+          skip: productsLen,
+          type: 'categorical',
+          currentPage: updatedCurrentPage,
+          products,
+        })
+      )
+    } else dispatch({type: 'set_categorical_products', payload:{currentPage: updatedCurrentPage}})
+  }
   return (
     <Container maxWidth="xl" sx={{my: 20}}>
       <Typography
@@ -24,16 +44,18 @@ const CategoricalProducts = () => {
         >
           Life is hard enough already. Let us make it a little easier.
         </Typography>
-        <TabsScrollButtons />
+        <TabsScrollButtons
+          scrollButtonsDisabled={{
+            left: currentPage === 0,
+            right: (currentPage * limit + limit) >= total,
+          }}
+          handleScrollButtonClick={handleScrollButtonClick}
+        />
       </Stack>
       <Grid container spacing={5} my={5} px={{xs: 0, md: 5}}>
-        {[...new Array(9)].map((_, i) => (
+        {products.slice(currentPage * limit, currentPage * limit + limit).map((product, i) => (
           <Grid item xs={12} tablet={6} lg={4} key={i}>
-            <ProductCard
-              title={'product ' + (i + 1)}
-              discountPrice={Math.random() * (200 - 50) + 50}
-              price={Math.random() * (400 - 300) + 300}
-            />
+            <ProductCard product={product} />
           </Grid>
         ))}
       </Grid>

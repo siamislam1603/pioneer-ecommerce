@@ -1,23 +1,12 @@
 import {Box, Container, Stack, Typography} from '@mui/material'
 import {useEffect, useRef, useState} from 'react'
+import {useSelector} from 'react-redux'
 import Categories from '../Banner/Categories'
 import TabsScrollButtons from '../TabsScrollButtons'
 import TrendingProducts from './TrendingProducts'
 
-const categories = ['Fashion', 'Technology', 'Interiors', 'Food & Drink']
-const data = [
-  {imgPath: 'assets/images/trending-1.svg', title: 'Seven Zero Five', price: 10.0},
-  {imgPath: 'assets/images/trending-2.svg', title: 'Clock', price: 20.0},
-  {imgPath: 'assets/images/trending-3.svg', title: 'Curology', price: 30.0},
-  {imgPath: 'assets/images/trending-4.svg', title: 'Chair', price: 40.0},
-  {imgPath: 'assets/images/trending-5.svg', title: 'Curology', price: 50.0},
-  {imgPath: 'assets/images/trending-1.svg', title: 'Seven Zero Five', price: 10.0},
-  {imgPath: 'assets/images/trending-2.svg', title: 'Clock', price: 20.0},
-  {imgPath: 'assets/images/trending-3.svg', title: 'Curology', price: 30.0},
-  {imgPath: 'assets/images/trending-4.svg', title: 'Chair', price: 40.0},
-  {imgPath: 'assets/images/trending-5.svg', title: 'Curology', price: 50.0},
-]
 const Trending = () => {
+  const {trending} = useSelector((state) => state.products)
   const leftScrollRef = useRef(),
     rightScrollRef = useRef()
   const [scrollButtonsRef, setScrollButtonsRef] = useState({left: null, right: null})
@@ -40,12 +29,12 @@ const Trending = () => {
       <Container maxWidth={'xl'} sx={{mt: 5}}>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Box></Box>
-          <Categories categories={categories}>
+          <Categories type="trending">
             <TabsScrollButtons handleScrollButtonClick={handleScrollButtonClick} />
           </Categories>
         </Stack>
       </Container>
-      <TrendingProducts products={data} scrollButtonsRef={scrollButtonsRef} />
+      <TrendingProducts products={trending.products} scrollButtonsRef={scrollButtonsRef} />
     </Box>
   )
 }

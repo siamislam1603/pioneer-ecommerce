@@ -18,11 +18,14 @@ export const CardContainer = styled(Grid)(
           justify-content: space-between;
       }
       img{
-          height: 100%;
-          object-fit: contain;
+          width: 100%;
+          height:100%;
+          object-fit: cover;
+          object-position:center;
+          border-radius:12px;
           position: absolute;
           right: 0;
-          transform: translateY(-40px);
+          transform: translateY(-32px);
       }
       .price{
           color:${theme.palette.warning.light};

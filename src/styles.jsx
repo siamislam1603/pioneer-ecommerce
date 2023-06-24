@@ -1,4 +1,4 @@
-import {Container, styled} from '@mui/material'
+import {Container, Typography, styled} from '@mui/material'
 
 export const ScrollableContainer = styled(Container)(
   ({theme, width}) => `
@@ -9,5 +9,14 @@ export const ScrollableContainer = styled(Container)(
     ${theme.breakpoints.up('xl')}{
         max-width: calc(1536px + ${width}px);
     }
+`
+)
+export const LineClamp = styled(Typography)(
+  ({line}) => `
+    overflow: hidden;
+    textOverflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: ${line};
+    -webkit-box-orient: vertical;
 `
 )

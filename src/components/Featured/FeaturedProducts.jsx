@@ -1,9 +1,11 @@
 import {Box, ButtonBase, CardContent, CardMedia, Tab, Typography} from '@mui/material'
+import {useSelector} from 'react-redux'
 import OrderNow from './OrderNow'
 import {CardContainer, FeaturedProductsTabs} from './styles'
+import { LineClamp } from '../../styles'
 
-const categories = ['perfumes', 'watch', 'lamps', 'headphones', 'cars', 'fruits', 'mobile', 'pc']
 const FeaturedProducts = ({scrollButtonsRef}) => {
+  const {featured} = useSelector((state) => state.products)
   const scrollButtons = (props) => {
     const {direction, onClick, disabled, orientation, ...others} = props
     return (
@@ -28,7 +30,7 @@ const FeaturedProducts = ({scrollButtonsRef}) => {
       allowScrollButtonsMobile
       ScrollButtonComponent={scrollButtons}
     >
-      {[...new Array(9)].map((_, i) => (
+      {featured.products.map((product, i) => (
         <Tab
           key={i}
           disableRipple={true}
@@ -36,22 +38,14 @@ const FeaturedProducts = ({scrollButtonsRef}) => {
           label={
             <>
               <CardContainer elevation={0}>
-                <CardMedia
-                  component="img"
-                  image={`https://source.unsplash.com/random/900x700/?${
-                    categories[Math.floor(Math.random() * 4)]
-                  }`}
-                  alt=""
-                />
+                <CardMedia component="img" image={product.thumbnail} alt="" />
                 <CardContent sx={{px: 0, color: 'mateBlack.main'}}>
-                  <Typography variant="h6" mt={2}>
-                    Product {i + 1}
-                  </Typography>
-                  <Typography variant="subtitle1">
-                    EAU DE PARFUM - M <small>- Man</small>
-                  </Typography>
+                  <LineClamp line={2} variant="h6" mt={2}>
+                    {product.title}
+                  </LineClamp>
+                  <LineClamp line={2} variant="subtitle1">{product.category}</LineClamp>
                   <Typography variant="body1" className="price">
-                    $285.00 USD
+                    ${product.price.toFixed(2)} USD
                   </Typography>
                 </CardContent>
                 <Box className="shadow-bg"></Box>

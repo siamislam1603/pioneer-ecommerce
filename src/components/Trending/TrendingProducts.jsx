@@ -1,5 +1,5 @@
 import {Box, ButtonBase, Grid, Tab, Typography, useTheme} from '@mui/material'
-import {ScrollableContainer} from '../../styles'
+import {LineClamp, ScrollableContainer} from '../../styles'
 import {CardContainer, TrendingProductsTabs} from './styles'
 
 const gradientBackgrounds = [
@@ -50,9 +50,9 @@ const TrendingProducts = ({products, scrollButtonsRef}) => {
               >
                 <Grid item xs={8} py={2}>
                   <Box>
-                    <Typography variant="h6" gutterBottom fontFamily="Poppins" className="title">
+                    <LineClamp line='3' variant="h6" gutterBottom fontFamily="Poppins" className="title">
                       {product.title}
-                    </Typography>
+                    </LineClamp>
                     <Typography
                       variant="body1"
                       gutterBottom
@@ -68,7 +68,7 @@ const TrendingProducts = ({products, scrollButtonsRef}) => {
                   </Typography>
                 </Grid>
                 <Grid item xs={4} position="relative">
-                  <Box component="img" src={product.imgPath} alt="" />
+                  <Box component="img" src={product.thumbnail} alt="" />
                 </Grid>
               </CardContainer>
             }

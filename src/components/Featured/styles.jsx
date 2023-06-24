@@ -20,6 +20,9 @@ export const CardContainer = styled(Card)(
     border-radius:30px;
     img{
         width:100%;
+        height:290px;
+        object-fit:cover;
+        object-position:center;
         border-radius:16px;
         box-shadow: 0px 17px 44px -14px rgba(14, 75, 128, 0.12);
     }
